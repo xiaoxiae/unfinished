@@ -12,6 +12,7 @@
     "com.unity.test-framework": "1.1.22",
     "com.unity.textmeshpro": "2.1.1",
     "com.unity.timeline": "1.2.18",
+    "com.unity.toolchain.linux-x86_64": "0.1.18-preview",
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -43,6 +44,7 @@
     "com.unity.modules.video": "1.0.0",
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
-    "com.unity.modules.xr": "1.0.0"
+    "com.unity.modules.xr": "1.0.0",
+    "com.h8man.2d.navmeshplus": "https://github.com/h8man/NavMeshPlus.git#master"
   }
 }

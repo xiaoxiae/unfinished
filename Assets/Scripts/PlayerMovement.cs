@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,15 +20,27 @@ public class PlayerMovement : MonoBehaviour
         direction = new Vector2(dx, dy).normalized;
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        Sprinting = Input.GetKeyDown(KeyCode.LeftShift);
+        Sprinting = Input.GetKey(KeyCode.LeftShift);
     }
     
     void FixedUpdate()
     {
-        rb.AddForce(direction * (Sprinting ? Player.SprintSpeed : Player.Speed), ForceMode2D.Impulse);
+        rb.AddForce(direction * ((Sprinting && Player.CurrentStamina != 0) ? Player.SprintSpeed : Player.Speed), ForceMode2D.Impulse);
+
+        // if we're sprinting, deplete stamina
+        if (Sprinting && Player.CurrentStamina != 0 && direction != Vector2.zero)
+        {
+            Player.CurrentStamina -= 0.3f;
+            Player.CurrentStamina = Math.Max(0, Player.CurrentStamina);
+        }
+        else
+        {
+            Player.CurrentStamina += 0.1f;
+            Player.CurrentStamina = Math.Min(Player.MaxStamina, Player.CurrentStamina);
+        }
 
         Vector2 lookDirection = mousePos - rb.position;
-        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
         rb.rotation = angle;
     }
 }

@@ -18,7 +18,7 @@ public class PlayerShooting : MonoBehaviour
             
             // shoot bullet, moving the source in the opposite direction
             bulletRigidBody.AddForce(bullet.transform.up * speed, ForceMode2D.Impulse);
-            sourceRigidBody.AddForce(-bullet.transform.up / 3, ForceMode2D.Impulse);
+            sourceRigidBody.AddForce(-bullet.transform.up, ForceMode2D.Impulse);
         }
     }
 }
