@@ -30,10 +30,10 @@ public class PlayerMovement : MonoBehaviour
         // if we're sprinting, deplete stamina
         if (Sprinting && Player.CurrentStamina != 0 && direction != Vector2.zero)
         {
-            Player.CurrentStamina -= 0.3f;
+            Player.CurrentStamina -= 0.6f;
             Player.CurrentStamina = Math.Max(0, Player.CurrentStamina);
         }
-        else
+        if (!Sprinting)
         {
             Player.CurrentStamina += 0.1f;
             Player.CurrentStamina = Math.Min(Player.MaxStamina, Player.CurrentStamina);

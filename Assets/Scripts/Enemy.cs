@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SimpleAIMovement : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
+    public float CurrentHealth = 100;
+
+    public float FOV = 5;
+    
     public Transform target;
     private NavMeshAgent agent;
     
@@ -19,6 +23,12 @@ public class SimpleAIMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        agent.SetDestination(target.position);
+        if (CurrentHealth <= 0)
+            Destroy(gameObject);
+        
+        if ((transform.position - target.position).magnitude < FOV)
+            agent.SetDestination(target.position);
+        else
+            agent.SetDestination(transform.position);
     }
 }

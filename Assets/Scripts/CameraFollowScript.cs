@@ -26,12 +26,9 @@ public class CameraFollowScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        var prev_x = transform.position.x;
-        var prev_y = transform.position.y;
-        
         transform.position = new Vector3(
-            (-prev_x + target.position.x) / 7 + prev_x,
-            (-prev_y + target.position.y) / 7 + prev_y,
+            target.position.x + follower.orthographicSize * 1/2f,
+            target.position.y,
             -10);
     }
 }
