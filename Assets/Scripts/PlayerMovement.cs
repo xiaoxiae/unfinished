@@ -7,6 +7,8 @@ public class PlayerMovement : MonoBehaviour
     public Camera cam;
 
     public Player Player;
+
+    public FieldOfView fov;
     
     public Vector2 direction;
     public Vector2 mousePos;
@@ -39,8 +41,12 @@ public class PlayerMovement : MonoBehaviour
             Player.CurrentStamina = Math.Min(Player.MaxStamina, Player.CurrentStamina);
         }
 
+        // look over there
         Vector2 lookDirection = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
         rb.rotation = angle;
+        
+        fov.SetAimDirection(lookDirection);
+        fov.SetOrigin(rb.transform.position);
     }
 }
