@@ -358,7 +358,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 100
   FOV: 6
-  target: {fileID: 1879559551}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 2560
+  target: {fileID: 1879559548}
+  StunDelay: 0.3
 --- !u!195 &153818301
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -861,7 +865,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506368827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2fe500515b84e6de183ebb4daa22e97c, type: 3}
   m_Name: 
@@ -1515,26 +1519,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.5}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 23e46026bbdde36ed8f6cf7d2a090e90, type: 3}
+    m_FontSize: 11
     m_FontStyle: 2
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Enter text...
+    m_LineSpacing: 1.5
+  m_Text: 
 --- !u!222 &821989292
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1593,25 +1597,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 23e46026bbdde36ed8f6cf7d2a090e90, type: 3}
+    m_FontSize: 11
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 1.5
   m_Text: 
 --- !u!222 &842887917
 CanvasRenderer:
@@ -28170,6 +28174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d627ee71e1e668c81937fbc10b59a174, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  executed: 
 --- !u!114 &1179060515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28216,7 +28221,7 @@ MonoBehaviour:
   m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
-  m_LineType: 0
+  m_LineType: 2
   m_HideMobileInput: 0
   m_CharacterValidation: 0
   m_CharacterLimit: 0
@@ -28247,8 +28252,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -28730,7 +28735,7 @@ MonoBehaviour:
   sourceRigidBody: {fileID: 1879559548}
   bulletPrefab: {fileID: 7991409090160128914, guid: 37f86c5b0c0a9c89589e9a641ff7e955,
     type: 3}
-  speed: 20
+  player: {fileID: 1879559554}
 --- !u!114 &1879559554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28750,15 +28755,14 @@ MonoBehaviour:
   CurrentStamina: 0
   StaminaBar: {fileID: 1366666191}
   CurrentAmmo: 7
-  MaxWeaponAmmo: 7
-  ReserveAmmo: 7
+  MaxAmmo: 7
+  Magazines: 3
   Speed: 0.7
   SprintSpeed: 1.4
   ReserveAmmoText: {fileID: 1307739574}
   CurrentAmmoText: {fileID: 1147124402}
-  ShootingDelay: 1
-  ReloadDelay: 5
-  Ammo: 7
+  ShootingDelay: 0.5
+  ReloadDelay: 3
 --- !u!58 &1879559555
 CircleCollider2D:
   m_ObjectHideFlags: 0

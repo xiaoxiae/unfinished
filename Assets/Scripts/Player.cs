@@ -15,8 +15,8 @@ public class Player : MonoBehaviour
     public StaminaBar StaminaBar;
 
     public int CurrentAmmo = 7;
-    public int MaxWeaponAmmo = 7;
-    public int ReserveAmmo = 0;
+    public int MaxAmmo = 7;
+    public int Magazines = 3;
 
     public float Speed = 2;
     public float SprintSpeed = 2.5f;
@@ -24,8 +24,8 @@ public class Player : MonoBehaviour
     public Text ReserveAmmoText;
     public Text CurrentAmmoText;
 
-    public int ShootingDelay = 1;
-    public int ReloadDelay = 5;
+    public float ShootingDelay = 1;
+    public float ReloadDelay = 5;
     
     void Start()
     {
@@ -34,21 +34,15 @@ public class Player : MonoBehaviour
         CurrentStamina = MaxHealth;
         MaxStamina = MaxHealth;
         
-        CurrentAmmo = MaxWeaponAmmo;
-        ReserveAmmo = 0;
+        CurrentAmmo = MaxAmmo;
         
         HealthBar.SetMaxHealth(MaxHealth);
     }
 
-    public int Ammo = 7;
-
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            CurrentHealth -= 10;
-        
         // stamina stuff
-        MaxStamina = MaxHealth;
+        MaxStamina = CurrentHealth;
         CurrentStamina = Math.Min(MaxStamina, CurrentStamina);  // restrict stamina to health
         
         // UI
@@ -56,6 +50,6 @@ public class Player : MonoBehaviour
         StaminaBar.SetStamina(CurrentStamina);
         
         CurrentAmmoText.text = CurrentAmmo.ToString();
-        ReserveAmmoText.text = ReserveAmmo.ToString();
+        ReserveAmmoText.text = Magazines.ToString();
     }
 }
