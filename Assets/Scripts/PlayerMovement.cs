@@ -10,7 +10,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector2 direction;
     public Vector2 mousePos;
+    
     public Vector2 scriptDirection;
+    public bool scriptSprinting;
     
     public bool Sprinting;
     
@@ -28,17 +30,20 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         // the player gets the final say in the movement
-        Vector2 dir = (direction.magnitude == 0 ? scriptDirection : direction);
+        bool guidedByScript = (direction.magnitude == 0);
         
-        rb.AddForce(dir * ((Sprinting && Player.CurrentStamina != 0) ? Player.SprintSpeed : Player.Speed), ForceMode2D.Impulse);
+        Vector2 dir = (guidedByScript ? scriptDirection : direction);
+        bool sprinting = (guidedByScript ? scriptSprinting : Sprinting);
+        
+        rb.AddForce(dir * ((sprinting && Player.CurrentStamina != 0) ? Player.SprintSpeed : Player.Speed), ForceMode2D.Impulse);
 
         // if we're sprinting, deplete stamina
-        if (Sprinting && Player.CurrentStamina != 0 && dir != Vector2.zero)
+        if (sprinting && Player.CurrentStamina != 0 && dir != Vector2.zero)
         {
             Player.CurrentStamina -= 0.6f;
             Player.CurrentStamina = Math.Max(0, Player.CurrentStamina);
         }
-        if (!Sprinting)
+        if (!sprinting)
         {
             Player.CurrentStamina += 0.1f;
             Player.CurrentStamina = Math.Min(Player.MaxStamina, Player.CurrentStamina);

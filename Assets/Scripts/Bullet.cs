@@ -14,6 +14,8 @@ public class Bullet : MonoBehaviour
         {
             other.CurrentHealth -= Damage;
             other.stunWakeUpTime = DateTime.Now.AddSeconds(other.StunDelay);
+            other.passiveTime = DateTime.Now.AddSeconds(other.AgressiveDuration);
+            other.agressive = true;
         }
         
         Destroy(gameObject);

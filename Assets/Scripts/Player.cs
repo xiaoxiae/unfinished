@@ -16,7 +16,7 @@ public class Player : MonoBehaviour
 
     public int CurrentAmmo = 7;
     public int MaxAmmo = 7;
-    public int Magazines = 3;
+    public int Magazines = int.MaxValue;
 
     public float Speed = 2;
     public float SprintSpeed = 2.5f;
@@ -33,6 +33,8 @@ public class Player : MonoBehaviour
         
         CurrentStamina = MaxHealth;
         MaxStamina = MaxHealth;
+
+        Magazines = int.MaxValue;
         
         CurrentAmmo = MaxAmmo;
         
@@ -50,6 +52,6 @@ public class Player : MonoBehaviour
         StaminaBar.SetStamina(CurrentStamina);
         
         CurrentAmmoText.text = CurrentAmmo.ToString();
-        ReserveAmmoText.text = Magazines.ToString();
+        ReserveAmmoText.text = "∞";
     }
 }

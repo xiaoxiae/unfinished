@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public float CurrentHealth = 100;
 
     public float FOV = 5;
-    
+
     public LayerMask layerMask;
 
     public Rigidbody2D self;
@@ -15,8 +15,14 @@ public class Enemy : MonoBehaviour
     
     private NavMeshAgent agent;
 
-    public float StunDelay = 0.3f;
+    public float StunDelay = 0.4f;
     public DateTime stunWakeUpTime; // enemy is stunned right after being hit
+    
+    // enemy gets aggressive after hit for a few seconds and will follow the player no matter what
+    public float AgressiveDuration = 4;
+    public bool agressive;
+    public DateTime passiveTime;
+
     
     // Start is called before the first frame update
     void Start()
@@ -35,6 +41,11 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
         
+        if (passiveTime <= DateTime.Now)
+        {
+            agressive = false;
+        }
+        
         // if the enemy is stunned, don't move
         if (stunWakeUpTime >= DateTime.Now)
         {
@@ -45,7 +56,7 @@ public class Enemy : MonoBehaviour
             // if the player is close and we have direct line of sight, attack
             RaycastHit2D hit = Physics2D.Raycast(transform.position, (-(Vector2)transform.position + target.position), FOV, layerMask);
 
-            if (hit.rigidbody == target)
+            if (hit.rigidbody == target || agressive)
             {
                 agent.SetDestination(target.position);
                 

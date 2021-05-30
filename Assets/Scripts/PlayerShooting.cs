@@ -22,6 +22,12 @@ public class PlayerShooting : MonoBehaviour
             player.Magazines -= 1;
             player.CurrentAmmo = player.MaxAmmo;
         }
+
+        if (!reloading && Input.GetKey(KeyCode.R))
+        {
+            reloading = true;
+            nextTimeShot = DateTime.Now.AddSeconds(player.ReloadDelay);
+        }
         
         if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
         {

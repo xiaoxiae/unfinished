@@ -13,6 +13,8 @@ public class Editor : MonoBehaviour
     public Player player;
     public PlayerMovement movement;
     
+    public Spawner spawner;
+    
     public Image Image;
     public Sprite GoodSprite;
     public Sprite BadSprite;
@@ -27,17 +29,12 @@ public class Editor : MonoBehaviour
         engine = Python.CreateEngine();
         scope = engine.CreateScope();
 
-        InputField.text = @"def update(player_position):  # TODO: enemy pos
-    # TODO: something with the positions
-    #       if you want to move or shoot, return
-    #       ((int, int) or None, (int, int) or None)";
-
         InputField.text = @"def update(player_position, enemy_positions):
   p_x, p_y = player_position
   for x, y in enemy_positions:
     if abs(p_x - x) + abs(p_y - y) < 2:
-      return (p_x - x, p_y - y)
-  return (0.0, 0.0)";
+      return (p_x - x, p_y - y, True)
+  return (0.0, 0.0, False)";
     }
 
     void Update()
@@ -67,10 +64,9 @@ public class Editor : MonoBehaviour
             
             var source = engine.CreateScriptSourceFromString(InputField.text);
             source.Execute(scope);
-            
-            var enemies = FindObjectsOfType<Enemy>();
+
             var enemyPositions = new List<(float x, float y)>();
-            foreach (Enemy enemy in enemies)
+            foreach (Enemy enemy in spawner.enemies)
                 enemyPositions.Add((enemy.transform.position.x, enemy.transform.position.y));
 
             PythonTuple tuple = new PythonTuple(enemyPositions);
@@ -78,13 +74,13 @@ public class Editor : MonoBehaviour
             
             PythonTuple result = scope.GetVariable("update")(playerPos, tuple);
             
-            //Debug.Log(result);
-            //Debug.Log((double)result[0]);
+            Debug.Log(result);
 
             // I'm going to hell for this
             try { movement.scriptDirection = new Vector2((float)result[0], (float)result[1]).normalized; } catch (Exception e) {}
             try { movement.scriptDirection = new Vector2((float)(double)result[0], (float)(double)result[1]).normalized; } catch (Exception e) {}
             try { movement.scriptDirection = new Vector2((int)result[0], (int)result[1]).normalized; } catch (Exception e) {}
+            movement.scriptSprinting = (bool)result[2];
 
             Image.sprite = GoodSprite;
         }
