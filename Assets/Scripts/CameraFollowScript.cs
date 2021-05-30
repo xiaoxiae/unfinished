@@ -27,7 +27,7 @@ public class CameraFollowScript : MonoBehaviour
     void FixedUpdate()
     {
         transform.position = new Vector3(
-            target.position.x + follower.orthographicSize * 1/2f,
+            target.position.x + follower.orthographicSize * 1/1.5f,
             target.position.y,
             -10);
     }

@@ -9,8 +9,10 @@ public class Enemy : MonoBehaviour
     public float FOV = 5;
     
     public LayerMask layerMask;
-    
+
+    public Rigidbody2D self;
     public Rigidbody2D target;
+    
     private NavMeshAgent agent;
 
     public float StunDelay = 0.3f;
@@ -42,11 +44,21 @@ public class Enemy : MonoBehaviour
         {
             // if the player is close and we have direct line of sight, attack
             RaycastHit2D hit = Physics2D.Raycast(transform.position, (-(Vector2)transform.position + target.position), FOV, layerMask);
-            
+
             if (hit.rigidbody == target)
+            {
                 agent.SetDestination(target.position);
+                
+                // look over there
+                Vector2 lookDirection = self.position - (Vector2) agent.nextPosition;
+                float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
+                self.rotation = angle;
+            }
             else
+            {
                 agent.SetDestination(transform.position);
+            }
+
         }
     }
     
