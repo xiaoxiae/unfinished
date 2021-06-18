@@ -13,3 +13,4 @@ The game is a top-down shooter, where the main gimmick is that you can enhance y
 - `r` - reload
 - `esc` - escape
 - `shift` - sprinting
+- `tab` - switch to editing mode
