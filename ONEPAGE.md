@@ -3,22 +3,20 @@ The point of this document is to outline the main design of the game **Unfinishe
 
 ---
 
-## Gimmick
 
-The game is a top-down shooter, where the main gimmick is that while your movement and shooting mechanics are functional, they are quite weak and bad. You need to edit the code that controls them in order to improve and fight enemies that are faster, smarter and tougher.
+The game is a top-down shooter, where the main gimmick is that you can enhance your movement with custom code, reacting to how close the enemies are to you. This will be an advantage against enemies that are faster than you.
 
 ```
-┌────────────────────┬──┬──┬──┐
-│                    │  │  │  │
-│                    ├──┴──┴──┤
+┌────────────────────┬────────┐
 │                    │        │
-│      Main game     │        │
-│                    │  Code  │
+│                    │        │
+│                    │        │
+│      Main game     │  Code  │
 │                    │ Editor │
+│                    │        │
 ├────────────────────┤        │
 │    Health, ammo    │        │
 └────────────────────┴────────┘
 ```
 
-## Setting
-The setting is a non-procedurally-generated abandoned city, where the main point is to scavenge for scarce resources like health and ammo. The longer you survive, the tougher the enemies get and the scarcer the resources are.
+The setting is a non-procedurally-generated maze, the main point being finding and killing all of the enemies found, while wisely using your stamina and ammo.
