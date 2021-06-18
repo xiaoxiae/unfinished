@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -10,11 +11,20 @@ public class PlayerShooting : MonoBehaviour
 
     public Player player;
 
+    public AudioSource shootingAudio;
+    public AudioSource hitSound;
+    public AudioSource reloadSound;
+
+    public InputField field;
+
     private DateTime nextTimeShot;
-    private bool reloading = false;
+    private bool reloading;
     
     void Update()
     {
+        if (field.isFocused)
+            return;
+        
         // finished reloading
         if (reloading && nextTimeShot <= DateTime.Now)
         {
@@ -23,24 +33,29 @@ public class PlayerShooting : MonoBehaviour
             player.CurrentAmmo = player.MaxAmmo;
         }
 
-        if (!reloading && Input.GetKey(KeyCode.R))
+        // R pressed - start reloading
+        // don't reload on full ammo
+        if (!reloading && Input.GetKey(KeyCode.R) && player.CurrentAmmo != player.MaxAmmo)
         {
             reloading = true;
             nextTimeShot = DateTime.Now.AddSeconds(player.ReloadDelay);
+            reloadSound.Play();
+        }
+        
+        // out of bullets - start reloading
+        if (nextTimeShot <= DateTime.Now && player.CurrentAmmo == 0 && player.Magazines != 0)
+        {
+            reloading = true;
+            nextTimeShot = DateTime.Now.AddSeconds(player.ReloadDelay);
+            reloadSound.Play();
         }
         
         if (Input.GetMouseButtonDown((int) MouseButton.LeftMouse))
         {
-            // start reloading
-            if (nextTimeShot <= DateTime.Now && player.CurrentAmmo == 0 && player.Magazines != 0)
-            {
-                reloading = true;
-                nextTimeShot = DateTime.Now.AddSeconds(player.ReloadDelay);
-            }
             
             if (nextTimeShot <= DateTime.Now && player.CurrentAmmo > 0)
             {
-                float r = Random.Range(-30f, 30f);
+                float r = Random.Range(-15f, 15f);
                 nextTimeShot = DateTime.Now.AddSeconds(player.ShootingDelay);
 
                 player.CurrentAmmo -= 1;
@@ -48,10 +63,14 @@ public class PlayerShooting : MonoBehaviour
                 // steady when shooting
                 if (GetComponent<PlayerMovement>().direction == Vector2.zero)
                     r = 0;
-
+                
+                shootingAudio.Play();
+                
                 GameObject bullet = Instantiate(bulletPrefab, sourceRigidBody.transform.position,
                     Quaternion.Euler(0, 0, sourceRigidBody.rotation + r));
                 Rigidbody2D bulletRigidBody = bullet.GetComponent<Rigidbody2D>();
+
+                bullet.GetComponent<Bullet>().hitSound = hitSound;
 
                 // shoot bullet, moving the source in the opposite direction
                 bulletRigidBody.AddForce(bullet.transform.up * Bullet.Speed, ForceMode2D.Force);

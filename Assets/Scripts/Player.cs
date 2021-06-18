@@ -23,9 +23,12 @@ public class Player : MonoBehaviour
     
     public Text ReserveAmmoText;
     public Text CurrentAmmoText;
-
+    
+    public Text enemyText;
+    public Spawner spawner;
+    
     public float ShootingDelay = 1;
-    public float ReloadDelay = 5;
+    public float ReloadDelay = 3;
     
     void Start()
     {
@@ -53,5 +56,14 @@ public class Player : MonoBehaviour
         
         CurrentAmmoText.text = CurrentAmmo.ToString();
         ReserveAmmoText.text = "∞";
+
+        enemyText.text = spawner.enemies.Count.ToString();
+        
+        if (spawner.enemies.Count == 0) {
+            Application.Quit();
+        }
+        
+        if (Input.GetKey("escape"))
+            Application.Quit();
     }
 }

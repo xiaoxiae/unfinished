@@ -11,15 +11,15 @@ public class Spawner : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject ammoPrefab;
     public GameObject healthPrefab;
+    public AudioSource deathSound;
     
     void Start()
     {
         foreach (EnemySpawner enemySpawner in GetComponentsInChildren<EnemySpawner>())
         {
-            
-            
             Enemy enemy = Instantiate(enemyPrefab, enemySpawner.GetComponent<Transform>().position, new Quaternion()).GetComponent<Enemy>();
             enemy.target = player.GetComponent<Rigidbody2D>();
+            enemy.deathSound = deathSound;
             enemies.Add(enemy);
         }
     }

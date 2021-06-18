@@ -79,6 +79,7 @@ MonoBehaviour:
   StunDelay: 0.3
   AgressiveDuration: 4
   agressive: 0
+  deathSound: {fileID: 0}
 --- !u!50 &6386350718307143559
 Rigidbody2D:
   serializedVersion: 4

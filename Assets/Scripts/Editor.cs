@@ -21,6 +21,8 @@ public class Editor : MonoBehaviour
     
     private ScriptEngine engine;
     private ScriptScope scope;
+    
+    private string oldText;
 
     void Start()
     {
@@ -44,10 +46,12 @@ public class Editor : MonoBehaviour
             if (!InputField.isFocused)
             {
                 EventSystem.current.SetSelectedGameObject(InputField.gameObject);
+                InputField.caretPosition = 0;
             }
             else
             {
                 EventSystem.current.SetSelectedGameObject(null);
+                InputField.text = oldText;
             }
         }
         
@@ -91,5 +95,7 @@ public class Editor : MonoBehaviour
             movement.scriptDirection = Vector2.zero;
             Image.sprite = BadSprite;
         }
+
+        oldText = InputField.text;
     }
 }

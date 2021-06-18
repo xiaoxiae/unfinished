@@ -23,6 +23,7 @@ public class Enemy : MonoBehaviour
     public bool agressive;
     public DateTime passiveTime;
 
+    public AudioSource deathSound;
     
     // Start is called before the first frame update
     void Start()
@@ -37,14 +38,15 @@ public class Enemy : MonoBehaviour
     {
         if (CurrentHealth <= 0)
         {
-            // TODO: some animation?
+            deathSound.Play();
             Destroy(gameObject);
         }
         
-        if (passiveTime <= DateTime.Now)
-        {
-            agressive = false;
-        }
+        // the enemies will be agressive forever -- it is more intuitive that way
+        //if (passiveTime <= DateTime.Now)
+        //{
+        //    agressive = false;
+        //}
         
         // if the enemy is stunned, don't move
         if (stunWakeUpTime >= DateTime.Now)
@@ -78,6 +80,10 @@ public class Enemy : MonoBehaviour
         Player player = collision.gameObject.GetComponent(typeof(Player)) as Player;
 
         if (player != null)
+        {
             player.CurrentHealth -= 1;
+            if (player.CurrentHealth <= 0)
+                Application.LoadLevel(Application.loadedLevel);
+        }
     }
 }

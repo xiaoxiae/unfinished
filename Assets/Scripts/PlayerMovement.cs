@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     public bool scriptSprinting;
     
     public bool Sprinting;
+
+    public AudioSource walkingSound;
+    public AudioSource sprintingSound;
     
     void Update()
     {
@@ -36,6 +39,13 @@ public class PlayerMovement : MonoBehaviour
         bool sprinting = (guidedByScript ? scriptSprinting : Sprinting);
         
         rb.AddForce(dir * ((sprinting && Player.CurrentStamina != 0) ? Player.SprintSpeed : Player.Speed), ForceMode2D.Impulse);
+        
+        if (dir != Vector2.zero)
+            if (!walkingSound.isPlaying && !sprintingSound.isPlaying)
+            {
+                if (sprinting) sprintingSound.Play();
+                else walkingSound.Play();
+            }
 
         // if we're sprinting, deplete stamina
         if (sprinting && Player.CurrentStamina != 0 && dir != Vector2.zero)
@@ -45,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (!sprinting)
         {
-            Player.CurrentStamina += 0.1f;
+            Player.CurrentStamina += 0.3f;
             Player.CurrentStamina = Math.Min(Player.MaxStamina, Player.CurrentStamina);
         }
 
@@ -53,5 +63,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 lookDirection = mousePos - rb.position;
         float angle = Mathf.Atan2(lookDirection.y, lookDirection.x) * Mathf.Rad2Deg - 90;
         rb.rotation = angle;
+        
     }
 }

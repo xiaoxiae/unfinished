@@ -1,0 +1,40 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="reload_data" version="1.3.0" audacityversion="2.4.1" sel0="0.0000000000" sel1="0.0000000000" vpos="0" h="0.0000000000" zoom="116.0611303345" rate="48000.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags>
+		<tag name="TITLE" value="www.FesliyanStudios.com"/>
+		<tag name="Composer" value="www.FesliyanStudios.com"/>
+		<tag name="YEAR" value="2019-08-25T00:24"/>
+		<tag name="GENRE" value="Sound Clip"/>
+		<tag name="COMMENTS" value="www.FesliyanStudios.com"/>
+		<tag name="Band" value="www.FesliyanStudios.com"/>
+		<tag name="ARTIST" value="www.FesliyanStudios.com"/>
+		<tag name="ALBUM" value="www.FesliyanStudios.com"/>
+	</tags>
+	<wavetrack name="Loading-and-chambering-gun-www.fesliyanstudios.com" isSelected="0" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="48000" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="144752">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1ff9e.au" len="127795" min="-0.963368" max="0.924901" rms="0.014337"/>
+				</waveblock>
+				<waveblock start="127795">
+					<simpleblockfile filename="eff1f412.au" len="16957" min="-0.993567" max="0.693238" rms="0.042737"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Loading-and-chambering-gun-www.fesliyanstudios.com" isSelected="0" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="48000" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="144752">
+				<waveblock start="0">
+					<simpleblockfile filename="eff1fe84.au" len="127795" min="-0.963368" max="0.924901" rms="0.014337"/>
+				</waveblock>
+				<waveblock start="127795">
+					<simpleblockfile filename="eff1ff6d.au" len="16957" min="-0.993567" max="0.693238" rms="0.042737"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
